@@ -1,0 +1,24 @@
+* {
+	box-sizing: border-box;
+}
+html, body {
+	position: relative;
+	width: 100vw;
+	height: 100vh;
+}
+
+body {
+	color: rgb(255, 255, 255);
+	background-color: rgb(240, 240, 240);
+	margin: 0;
+	box-sizing: border-box;
+	font-family: 'Fira Sans', sans-serif;
+	display: grid;
+}
+
+@media (min-width: 700px) {
+	body {
+		justify-items: center;
+		align-items: center;
+	}
+}
