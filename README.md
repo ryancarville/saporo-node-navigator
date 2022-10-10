@@ -17,8 +17,12 @@ This app is a Node Navigator where a list of nodes is rendered and can be expand
 
 ## Live Demo
 [Live Demo Site](https://saporo-node-navigator.vercel.app/)
-## Get started (from initial repo clone)
 
+## Screenshots
+<img src="https://i.ibb.co/sgzxhh1/saporo-node-nav-screenshot-2.png" alt="Screenshot of Node Navigator App" width="400"  />
+<img src="https://i.ibb.co/09knCRw/saporo-node-nav-screenshot-1.png" alt="Screenshot of Node Navigator App" width="400"  />
+
+## Get started (from initial repo clone)
 Install the dependencies...
 
 ```bash
