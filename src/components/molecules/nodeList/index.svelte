@@ -13,10 +13,13 @@
 
   // props
   export let nodes: IMockData[];
-
   // local vars
+  // let prevNodes: IMockData[] = [];
   const dispatch = createEventDispatcher();
   let exapndedNodeIdx: Writable<number> = writable(undefined);
+    let renderList: Writable<boolean> = writable(false);
+
+  $: {renderList.set(true)}
 
   // reset open row and disatch action to add selected to to navigator
   function handlOpenNode(value: IHistoryNode) {
@@ -33,7 +36,7 @@
   }
 </script>
 
-{#if nodes.length}
+{#if $renderList && nodes.length}
   <section transition:fly="{{ y: 400 }}" >
     <table class="nodeTableWrapper">
       {#each nodes as node, idx (node.id)}
