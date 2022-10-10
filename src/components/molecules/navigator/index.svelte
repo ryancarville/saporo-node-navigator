@@ -43,7 +43,7 @@
     </button>
   {/if}
   {#if !historyList.isEmpty()}
-    {#each historyList.listAllValues() as value, idx (value.id)}
+    {#each historyList.listAllValues() as value, idx}
       <button
         type={'button'}
         on:click={() => handleDirectNodeClick(idx)}

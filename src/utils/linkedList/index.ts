@@ -49,6 +49,12 @@ export class LinkedList<T> implements ILinkedList<T> {
       let currIdx: number = 0;
       let prev: ILinkedListNode<T> = this.head;
       let tail: ILinkedListNode<T> = this.head.next;
+      // fail safe if the next is null then we are at the head
+      if (tail === null) {
+        this.clear();
+        return;
+      }
+
       while (tail.next) {
         this.size++;
         if (currIdx === startIdx) break;

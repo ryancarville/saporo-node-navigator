@@ -34,7 +34,7 @@
 </script>
 
 {#if nodes.length}
-  <section transition:fly="{{ delay: 10, y: 10, duration: 500 }}" >
+  <section transition:fly="{{ y: 400 }}" >
     <table class="nodeTableWrapper">
       {#each nodes as node, idx (node.id)}
         <tr

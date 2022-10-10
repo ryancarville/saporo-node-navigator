@@ -50,7 +50,9 @@
 		bind:historyList
 		on:onBack={handleOnBack}
 	/>
-  <NodeDetails bind:node={currentNode} />
+	{#if currentNode}
+  	<NodeDetails bind:node={currentNode} />
+	{/if}
   {#if historyList.isEmpty()}
 		<h3>Nodes:</h3>
 	{:else}
