@@ -8,6 +8,8 @@ This is a coding challenge created by the [Saporo](https://www.saporo.io) Fronte
 - Svelte (Framework)
 - TypeScript (Language)
 - JavaScript (Language)
+- HTML5 (Language)
+- CSS5 (Language)
 
 ## Overview
 
@@ -28,7 +30,7 @@ npm install
 npm run dev
 ```
 
-Navigate to [localhost:8080](http://localhost:8080). You should see your app running.
+Navigate to [localhost:8080](http://localhost:8080). You should see the app running.
 
 By default, the server will only respond to requests from localhost. To allow connections from other computers, edit the `sirv` commands in package.json to include the option `--host 0.0.0.0`.
 

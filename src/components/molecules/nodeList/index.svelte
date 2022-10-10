@@ -8,6 +8,7 @@
   import { createEventDispatcher } from "svelte";
   import { shareAlt, plus, minus } from 'svelte-awesome/icons';
   import type { IMockData } from "../../../types/mockData";
+  import type { IHistoryNode } from '../../../types/linkedListNode';
 
   // props
   export let nodes: IMockData[];
@@ -17,9 +18,9 @@
   let exapndedNodeIdx: number = undefined;
 
   // reset open row and disatch action to add selected to to navigator
-  function onOpenConnection(name: string) {
+  function onOpenConnection(value: IHistoryNode) {
     exapndedNodeIdx = undefined;
-    dispatch('newId', { name })
+    dispatch('newId', { id: value.id, name: value.name })
   };
 
   // if the row that is click is open, close it.  Else open it
@@ -27,7 +28,6 @@
     if (exapndedNodeIdx === idx) exapndedNodeIdx = undefined;
     else { exapndedNodeIdx = idx; }
   }
-
 </script>
 
 {#if nodes.length}
@@ -53,7 +53,7 @@
               <span>Number of connected nodes: {node.connections.length}</span>
               <button
                 type={'button'}
-                on:click={() => onOpenConnection(node.name)}
+                on:click={() => onOpenConnection({id: node.id, name: node.name})}
                 class="openNodeBtn"
                 aria-label={`Open ${node.name}`}
                 title={`Open ${node.name}`}

@@ -1,4 +1,4 @@
-import type { ILinkedListNode } from "../linkedListNode"
+import type { IHistoryNode, ILinkedListNode } from "../linkedListNode"
 
 // Linked List interface
 export interface ILinkedList {
@@ -6,7 +6,7 @@ export interface ILinkedList {
   size: number;
   addNode: (newNode: ILinkedListNode) => void;
   removeNodes: (idx: number) => void;
-  listAllValues: () => string[];
+  listAllValues: () => IHistoryNode[];
   getList: () => ILinkedList;
   getFirst: () => ILinkedListNode | null;
   getLast: () => ILinkedListNode;

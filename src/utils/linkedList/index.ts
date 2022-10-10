@@ -1,5 +1,5 @@
 import type { ILinkedList } from "../../types/linkedList"
-import type { ILinkedListNode } from "../../types/linkedListNode"
+import type { IHistoryNode, ILinkedListNode } from "../../types/linkedListNode"
 
 /**
  * @description Linked List class - will create a new linked list along with all CRUD methods
@@ -41,7 +41,7 @@ export class LinkedList implements ILinkedList {
   // remove the nodes past a given index inclusive
   public removeNodes(startIdx: number): void {
     // if only one node in list and the index is zero or less we want to clear the list (less as a fail safe)
-    if (this.size <= 0 && startIdx <= 0) this.clear();
+    if (this.size <= 1 && startIdx <= 0) this.clear();
     // else loop thru the list until we reach the index we want to remove
     // then set the previous pointer to null
     else {
@@ -62,9 +62,9 @@ export class LinkedList implements ILinkedList {
   }
 
   // loop thru list and add values to a collection to return
-  public listAllValues(): string[] {
+  public listAllValues(): IHistoryNode[] {
     let node: ILinkedListNode = this.head;
-    const allValues: string[] = [];
+    const allValues: IHistoryNode[] = [];
 
     if (node === null) return null;
     while (node) {

@@ -45,10 +45,10 @@
       <button
         on:click={() => handleDirectNodeClick(idx)}
         class={"linkedNode"}
-        title={`Back to node ${value}`}
+        title={`Back to node ${value.name}`}
         disabled={historyList.size - 1 === idx}
       >
-        {value} <Icon data={arrowRight} scale={1.3}/>
+        {value.name} <Icon data={arrowRight} scale={1.3}/>
       </button>
     {/each}
   {/if}

@@ -8,35 +8,42 @@
   import type { ILinkedListNode } from "../../../types/linkedListNode";
   import type { ILinkedList } from "../../../types/linkedList";
   import { LinkedListNode } from "../../../utils/linkedListNode";
-  // props
+
+	// props
 	export let nodes: IMockData[];
 	export let historyList: ILinkedList;
 
   // local vars
 	let currentNodes: IMockData[] = nodes;
 	let currentNode = undefined;
+	let closeAllRows: boolean = true;
 
   // add the selected node is to the history list, set the state for the current node and filter all nodes for its connections
 	function handleCurrentId(event: any) {
-		const {name} = event.detail;
-		const newNode: ILinkedListNode = new LinkedListNode(name);
+		closeAllRows = true;
+		const {id, name} = event.detail;
+		const newNode: ILinkedListNode = new LinkedListNode({id, name});
 		historyList.addNode(newNode);
-		historyList.head = historyList.head;
-		currentNode = nodes.find(node => node.name === newNode.value);
+		historyList = historyList;
+		currentNode = nodes.find(node => node.id === newNode.value.id);
 		currentNodes = [...nodes.filter(node => currentNode.connections.includes(node.id))];
 	}
 
   // update the state when back event happens (single step or jump to)
   // will reset to the orignal state if no nodes are in the history list
 	function handleOnBack(event: any) {
+		closeAllRows = true;
 		const {historyList} = event.detail;
-		currentNode = historyList.isEmpty() ? undefined : nodes.find(node => node.name === historyList.getLast().value);
+		currentNode = historyList.isEmpty() ? undefined : nodes.find(node => node.id === historyList.getLast().value.id);
 		currentNodes = historyList.isEmpty() ? nodes : [...nodes.filter(node => currentNode.connections.includes(node.id))];
 	}
 </script>
 
 <section class={'nodeNavigatorWrapper'}>
-  <Navigator bind:historyList on:onBack={handleOnBack}/>
+  <Navigator
+		bind:historyList
+		on:onBack={handleOnBack}
+	/>
   <NodeDetails bind:node={currentNode} />
   {#if historyList.isEmpty()}
 		<h3>Nodes:</h3>
@@ -47,7 +54,10 @@
 			<h3>No Connected Nodes</h3>
 		{/if}
   {/if}
-  <NodeList bind:nodes={currentNodes} on:newId={handleCurrentId} />
+  <NodeList
+		bind:nodes={currentNodes}
+		on:newId={handleCurrentId}
+	/>
 </section>
 
 <style>

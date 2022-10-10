@@ -12,10 +12,11 @@
 
 <main>
 	<header class={'headerWrapper'}>
+		<h1>Node Navigator</h1>
 		<img
 			src={'https://global-uploads.webflow.com/604461bb39ddee57e19874b2/604461bb39ddee741a987696_White%20logo%20-%20no%20background.svg'}
-			alt={'Saporo Logo'}
-			title={'Saporo: Order In Chaos'}
+			alt={'Saporo - Order In Chaos'}
+			title={'Saporo - Order In Chaos'}
 			class={'saporoLogo'}
 		/>
 	</header>
@@ -26,7 +27,7 @@
 	main {
 		width: 100vw;
 		height: auto;
-		padding: 1em;
+		padding: 0 1em;
 		margin: 0 auto 0 auto;
 		background-image: linear-gradient(90deg, #ef4136, #fbb040);
 		overflow: auto;
@@ -35,9 +36,11 @@
 	}
 	.headerWrapper {
 		width: 90vw;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 	}
 	.saporoLogo {
-		float: right;
 		max-width: 10em;
 	}
 	@media (min-width: 700px) {

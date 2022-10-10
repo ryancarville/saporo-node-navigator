@@ -9,7 +9,7 @@ export const data: IMockData[] = [
       'Voluptate sunt ullamco id est veniam. Deserunt non dolore consectetur ullamco in ad veniam ullamco ex consectetur.',
     description:
       'Minim aliqua consectetur excepteur minim cillum ad irure incididunt in sit. Ad culpa tempor laboris officia aute nisi officia exercitation. Minim adipisicing aliqua velit eiusmod eiusmod aute anim sit eiusmod non pariatur amet. Dolor et in ad aute sunt nostrud reprehenderit nisi anim cupidatat consectetur tempor commodo. Aliqua deserunt magna elit minim duis tempor esse cupidatat. Voluptate sunt ullamco id est veniam. Deserunt non dolore consectetur ullamco in ad veniam ullamco ex consectetur.',
-    connections: []
+    connections: ['2']
   },
   {
     id: '2',
@@ -27,7 +27,7 @@ export const data: IMockData[] = [
       'Deserunt mollit et nostrud minim. Labore adipisicing proident mollit nisi consequat duis cillum id nisi ea non dolor.',
     description:
       'Nulla culpa labore laborum officia. Exercitation culpa consequat velit pariatur in amet aliquip. Incididunt ea tempor reprehenderit minim dolor deserunt do. Mollit sunt nisi quis est culpa. Cupidatat culpa non veniam cillum velit non eiusmod proident. In mollit do labore eiusmod et in.>Cillum labore sint consequat ullamco veniam voluptate cupidatat do veniam. Sunt do occaecat sit dolor aliqua fugiat ipsum aute occaecat consectetur. Aute enim mollit ad qui consequat elit aute id anim eiusmod aute dolor sint voluptate.',
-    connections: ['2']
+    connections: []
   },
   {
     id: '4',

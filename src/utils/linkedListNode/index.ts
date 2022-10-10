@@ -1,14 +1,14 @@
-import type { ILinkedListNode } from "../../types/linkedListNode"
+import type { IHistoryNode, ILinkedListNode } from "../../types/linkedListNode"
 
 /**
  * @description Linked List Node
  */
 
 export class LinkedListNode implements ILinkedListNode {
-  value: string;
+  value: IHistoryNode;
   next?: ILinkedListNode;
 
-  constructor(value: string) {
+  constructor(value: IHistoryNode) {
     this.value = value;
     this.next = null;
   }
