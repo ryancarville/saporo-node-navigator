@@ -13,12 +13,13 @@
 
   // props
   export let nodes: IMockData[];
+
   // local vars
-  // let prevNodes: IMockData[] = [];
   const dispatch = createEventDispatcher();
   let exapndedNodeIdx: Writable<number> = writable(undefined);
-    let renderList: Writable<boolean> = writable(false);
+  let renderList: Writable<boolean> = writable(false);
 
+  // reactive declaratiion to rerender list 
   $: {renderList.set(true)}
 
   // reset open row and disatch action to add selected to to navigator
