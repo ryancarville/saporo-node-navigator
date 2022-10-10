@@ -1,12 +1,12 @@
 import type { ILinkedList } from "../../types/linkedList"
-import type { IHistoryNode, ILinkedListNode } from "../../types/linkedListNode"
+import type { ILinkedListNode } from "../../types/linkedListNode"
 
 /**
  * @description Linked List class - will create a new linked list along with all CRUD methods
  */
 
-export class LinkedList implements ILinkedList {
-  public head: ILinkedListNode | null;
+export class LinkedList<T> implements ILinkedList<T> {
+  public head: ILinkedListNode<T> | null;
   public size: number;
 
   constructor(head = null) {
@@ -22,7 +22,7 @@ export class LinkedList implements ILinkedList {
   }
 
   // add a new node to the list
-  public addNode(newNode: ILinkedListNode): void {
+  public addNode(newNode: ILinkedListNode<T>): void {
     let node = this.head;
     // empty list
     if (node === null) {
@@ -45,27 +45,25 @@ export class LinkedList implements ILinkedList {
     // else loop thru the list until we reach the index we want to remove
     // then set the previous pointer to null
     else {
-      this.size = 0;
+      this.size = 1;
       let currIdx: number = 0;
-      let prev: ILinkedListNode = this.head;
-      let tail: ILinkedListNode = this.head.next;
+      let prev: ILinkedListNode<T> = this.head;
+      let tail: ILinkedListNode<T> = this.head.next;
       while (tail.next) {
+        this.size++;
         if (currIdx === startIdx) break;
         prev = tail;
         tail = tail.next;
         currIdx++;
-        this.size++;
       }
       prev.next = null;
     }
-
   }
 
   // loop thru list and add values to a collection to return
-  public listAllValues(): IHistoryNode[] {
-    let node: ILinkedListNode = this.head;
-    const allValues: IHistoryNode[] = [];
-
+  public listAllValues(): T[] {
+    let node: ILinkedListNode<T> = this.head;
+    const allValues: T[] = [];
     if (node === null) return null;
     while (node) {
       allValues.push(node.value);
@@ -74,18 +72,13 @@ export class LinkedList implements ILinkedList {
     return allValues;
   }
 
-  // return the instance of the class
-  public getList(): ILinkedList {
-    return this;
-  }
-
   // get first node
-  public getFirst(): ILinkedListNode {
+  public getFirst(): ILinkedListNode<T> {
     return this.head;
   }
 
   // get the last node
-  public getLast(): ILinkedListNode {
+  public getLast(): ILinkedListNode<T> {
     let lastNode = this.head;
     if (lastNode) {
       while (lastNode.next) {

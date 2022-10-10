@@ -5,14 +5,15 @@
   import { createEventDispatcher } from "svelte";
   import { arrowRight, backward } from 'svelte-awesome/icons';
   import type { ILinkedList } from '../../../types/linkedList';
+  import type { IHistoryNode } from '../../../types/linkedListNode';
 
   // props
-  export let historyList: ILinkedList;
+  export let historyList: ILinkedList<IHistoryNode>;
 
   // local var
   const dispatch = createEventDispatcher();
 
-  // dispatch new history list on back event.  If no open nodes in history disable the back button
+  // remove nodes from the linked list and dispatch updated history list
   function handleBack() {
     const idx: number = historyList.size === 1 ? 0 : historyList.size - 1;
     historyList.removeNodes(idx);
@@ -20,7 +21,7 @@
     dispatch('onBack',{ historyList });
   }
 
-  // when a node in the history tree is clicked, clear history up to that node and dispatch the new history list
+  // when a node in the history tree is clicked, clear history up to that node and dispatch the updated history list
   function handleDirectNodeClick(idx: number) {
     historyList.removeNodes(idx);
     historyList = historyList;
@@ -31,6 +32,7 @@
 <nav>
   {#if !historyList.isEmpty()}
     <button
+      type={'button'}
       on:click={handleBack}
       disabled={historyList.isEmpty()}
       aria-label={'Back'}
@@ -41,8 +43,9 @@
     </button>
   {/if}
   {#if !historyList.isEmpty()}
-    {#each historyList.listAllValues() as value, idx}
+    {#each historyList.listAllValues() as value, idx (value.id)}
       <button
+        type={'button'}
         on:click={() => handleDirectNodeClick(idx)}
         class={"linkedNode"}
         title={`Back to node ${value.name}`}

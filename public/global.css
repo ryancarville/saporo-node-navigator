@@ -1,6 +1,13 @@
+:root {
+	--primary-color: #ef4136;
+	--secondary-color: #fbb040;
+}
+
 * {
 	box-sizing: border-box;
+	font-family: 'Fira Sans', sans-serif;
 }
+
 html, body {
 	position: relative;
 	width: 100vw;
@@ -9,10 +16,12 @@ html, body {
 
 body {
 	color: rgb(255, 255, 255);
+	background-image: url("https://global-uploads.webflow.com/604461bb39ddee57e19874b2/60446a330a42d5aa4dc998f1_Color%20logo%20-%20no%20background.svg");
+	background-position: center;
+	background-size: 25vw;
+	background-repeat: no-repeat;
 	background-color: rgb(240, 240, 240);
 	margin: 0;
-	box-sizing: border-box;
-	font-family: 'Fira Sans', sans-serif;
 	display: grid;
 }
 

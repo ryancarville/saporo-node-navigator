@@ -4,56 +4,59 @@
   // The expantion of a row and the addtion of a node to the navigator happens here
   import Icon from 'svelte-awesome';
 	import { quintOut } from 'svelte/easing';
-  import { slide } from 'svelte/transition';
+  import { slide, fade, fly } from 'svelte/transition';
   import { createEventDispatcher } from "svelte";
   import { shareAlt, plus, minus } from 'svelte-awesome/icons';
   import type { IMockData } from "../../../types/mockData";
   import type { IHistoryNode } from '../../../types/linkedListNode';
+  import { Writable, writable } from 'svelte/store';
 
   // props
   export let nodes: IMockData[];
 
   // local vars
   const dispatch = createEventDispatcher();
-  let exapndedNodeIdx: number = undefined;
+  let exapndedNodeIdx: Writable<number> = writable(undefined);
 
   // reset open row and disatch action to add selected to to navigator
-  function onOpenConnection(value: IHistoryNode) {
-    exapndedNodeIdx = undefined;
-    dispatch('newId', { id: value.id, name: value.name })
+  function handlOpenNode(value: IHistoryNode) {
+    dispatch('addNode', { id: value.id, name: value.name });
   };
 
   // if the row that is click is open, close it.  Else open it
   function handleExpand(idx: number) {
-    if (exapndedNodeIdx === idx) exapndedNodeIdx = undefined;
-    else { exapndedNodeIdx = idx; }
+    exapndedNodeIdx.update((currIdx: number) => {
+      if (currIdx === idx) currIdx = -1;
+      else { currIdx = idx; }
+      return currIdx;
+    });
   }
 </script>
 
 {#if nodes.length}
-  <section>
+  <section transition:fly="{{ delay: 10, y: 10, duration: 500 }}" >
     <table class="nodeTableWrapper">
-      {#each nodes as node, idx}
+      {#each nodes as node, idx (node.id)}
         <tr
           class="nodeTableRow"
           on:click={() => handleExpand(idx)}
-          title={exapndedNodeIdx === idx ? `Close ${node.name}` : `Expand ${node.name}`}
+          title={$exapndedNodeIdx === idx ? `Close ${node.name}` : `Expand ${node.name}`}
         >
           <th>
-            {#if exapndedNodeIdx === idx}
+            {#if $exapndedNodeIdx === idx}
               <Icon data={minus} style={'margin-right: 0.5em'} />
             {:else}
               <Icon data={plus} style={'margin-right: 0.5em'} />
             {/if}
             {node.name}
           </th>
-          {#if exapndedNodeIdx === idx}
+          {#if $exapndedNodeIdx === idx}
             <td transition:slide="{{delay: 100, duration: 350, easing: quintOut }}">
               <p>{node.summary}</p>
               <span>Number of connected nodes: {node.connections.length}</span>
               <button
                 type={'button'}
-                on:click={() => onOpenConnection({id: node.id, name: node.name})}
+                on:click={() => handlOpenNode({id: node.id, name: node.name})}
                 class="openNodeBtn"
                 aria-label={`Open ${node.name}`}
                 title={`Open ${node.name}`}
@@ -103,13 +106,13 @@
     height: 3em;
     cursor: pointer;
     border: none;
-    background-color: #ef4236;
+    background-color: var(--primary-color);
     border-radius: .3em;
     padding: .5em;
     text-align: center;
   }
   .openNodeBtn:hover {
-    color: #ef4236;
+    color: var(--primary-color);
     background-color: black;
   }
 </style>

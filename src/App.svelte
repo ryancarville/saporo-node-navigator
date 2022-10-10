@@ -1,16 +1,19 @@
 <script lang="ts">
   // Main app entry point
-	import type { IMockData } from "./types/mockData";
-	import NodeNavigator from '../src/components/organisims/NodeNavigator/index.svelte';
   import { LinkedList } from "./utils/linkedList";
+	import type { IMockData } from "./types/mockData";
   import type { ILinkedList } from "./types/linkedList";
+  import type { IHistoryNode } from "./types/linkedListNode";
+	import NodeNavigator from '../src/components/organisims/NodeNavigator/index.svelte';
+  import { fade } from "svelte/transition";
+  import { quintOut } from "svelte/easing";
 
 	// props
 	export let nodes: IMockData[];
-	export let historyList: ILinkedList = new LinkedList();
+	export let historyList: ILinkedList<IHistoryNode> = new LinkedList<IHistoryNode>();
 </script>
 
-<main>
+<main transition:fade="{{delay: 1000, duration: 500}}">
 	<header class={'headerWrapper'}>
 		<h1>Node Navigator</h1>
 		<img
@@ -29,7 +32,7 @@
 		height: auto;
 		padding: 0 1em;
 		margin: 0 auto 0 auto;
-		background-image: linear-gradient(90deg, #ef4136, #fbb040);
+		background-image: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
 		overflow: auto;
 		display: flex;
 		flex-direction: column;
