@@ -18,7 +18,7 @@ body {
 	color: rgb(255, 255, 255);
 	background-image: url("https://global-uploads.webflow.com/604461bb39ddee57e19874b2/60446a330a42d5aa4dc998f1_Color%20logo%20-%20no%20background.svg");
 	background-position: center;
-	background-size: 25vw;
+	background-size: 90vw;
 	background-repeat: no-repeat;
 	background-color: rgb(240, 240, 240);
 	margin: 0;
@@ -27,6 +27,7 @@ body {
 
 @media (min-width: 700px) {
 	body {
+		background-size: 25vw;
 		justify-items: center;
 		align-items: center;
 	}

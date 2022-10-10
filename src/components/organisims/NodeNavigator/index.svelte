@@ -17,7 +17,7 @@
 	let currentNodes: IMockData[] = nodes;
 	let currentNode: IMockData = undefined;
 
-	// set the current node if id is passed and its connections
+	// set the current node and its connections if id is passed
 	// else reset to original state
 	function setNodes(id?: string) {
 		if (id) {
@@ -29,7 +29,7 @@
 		}
 	}
 
-  // add the selected node is to the history list, set the state for the current node
+  // add the selected node to the history list then set the state for the current node
 	function handlAddNode(event: any): void {
 		const {id, name} = event.detail;
 		const newNode: ILinkedListNode<IHistoryNode> = new LinkedListNode({id, name});
@@ -53,23 +53,8 @@
 	{#if currentNode}
   	<NodeDetails bind:node={currentNode} />
 	{/if}
-  {#if historyList.isEmpty()}
-		<h3>Nodes:</h3>
-	{:else}
-		{#if currentNode.connections.length}
-    	<h3>Connected Nodes:</h3>
-		{:else}
-			<h3>No Connected Nodes</h3>
-		{/if}
-  {/if}
   <NodeList
-		bind:nodes={currentNodes}
+		nodes={currentNodes}
 		on:addNode={handlAddNode}
 	/>
 </section>
-
-<style>
-  .nodeNavigatorWrapper h3 {
-    margin: 0;
-  }
-</style>

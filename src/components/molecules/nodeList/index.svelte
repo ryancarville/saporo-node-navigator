@@ -17,10 +17,6 @@
   // local vars
   const dispatch = createEventDispatcher();
   let exapndedNodeIdx: Writable<number> = writable(undefined);
-  let renderList: Writable<boolean> = writable(false);
-
-  // reactive declaratiion to rerender list 
-  $: {renderList.set(true)}
 
   // reset open row and disatch action to add selected to to navigator
   function handlOpenNode(value: IHistoryNode) {
@@ -37,8 +33,9 @@
   }
 </script>
 
-{#if $renderList && nodes.length}
-  <section transition:fly="{{ y: 400 }}" >
+{#if nodes.length}
+  <section transition:fly="{{ delay: 200, y: 400, duration: 400 }}" >
+    <h3>Nodes:</h3>
     <table class="nodeTableWrapper">
       {#each nodes as node, idx (node.id)}
         <tr
@@ -73,9 +70,16 @@
       {/each}
     </table>
   </section>
+{:else}
+  <section transition:fade="{{delay: 400,  duration: 300 }}" >
+    <h3>No Connected Nodes</h3>
+  </section>
 {/if}
 
 <style>
+  section h3 {
+    margin: 0;
+  }
   .nodeTableWrapper {
     width: 100%;
     margin: 0 auto 0 auto;
