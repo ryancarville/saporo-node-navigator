@@ -15,6 +15,8 @@ This is a coding challenge created by the [Saporo](https://www.saporo.io) Fronte
 
 This app is a Node Navigator where a list of nodes is rendered and can be expanded to learn more about a node and display all the other nodes that are directly connected to it.  It assumes the nodes received are a collection of objects and in this challenge it uses dummy data which can be found in the directory `src/data`.
 
+## Live Demo
+[Live Demo Site](https://saporo-node-navigator.vercel.app/)
 ## Get started (from initial repo clone)
 
 Install the dependencies...
