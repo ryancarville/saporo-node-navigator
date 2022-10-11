@@ -2,7 +2,7 @@
   // Node List Component
   // This component will render a list of the node passed from props
   // The expantion of a row and the addtion of a node to the navigator happens here
-  import Icon from 'svelte-awesome';
+  import Icon from '../../atoms/Icon/index.svelte'
 	import { quintOut } from 'svelte/easing';
   import { slide, fade, fly } from 'svelte/transition';
   import { createEventDispatcher } from "svelte";
@@ -18,12 +18,13 @@
   const dispatch = createEventDispatcher();
   let exapndedNodeIdx: Writable<number> = writable(undefined);
 
-  // reset open row and disatch action to add selected to to navigator
+  // disatch action to add selected to to navigator update node list
   function handlOpenNode(value: IHistoryNode) {
-    dispatch('addNode', { id: value.id, name: value.name });
+    const { id, name } = value;
+    dispatch('addNode', { id, name });
   };
 
-  // if the row that is click is open, close it.  Else open it
+  // if the row clicked is open, close it.  Else open it
   function handleExpand(idx: number) {
     exapndedNodeIdx.update((currIdx: number) => {
       if (currIdx === idx) currIdx = -1;

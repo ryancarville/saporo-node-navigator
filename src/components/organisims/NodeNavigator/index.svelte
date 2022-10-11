@@ -15,13 +15,14 @@
 	let nodes: IMockData[] = getContext('nodes');
 
   // local vars
+	let historyList: ILinkedList<IHistoryNode> = new LinkedList<IHistoryNode>();
 	let currentNodes: IMockData[] = nodes;
 	let currentNode: IMockData = undefined;
-	let historyList: ILinkedList<IHistoryNode> = new LinkedList<IHistoryNode>();
 
 	// set the current node and its connections if id is passed
 	// else reset to original state
-	function setNodes(id?: string) {
+	function handelSetNodes(event: any): void {
+		const { id } = event.detail;
 		if (id) {
 			currentNode = nodes.find(node => node.id === id);
 			currentNodes = [...nodes.filter(node => currentNode.connections.includes(node.id))];
@@ -32,31 +33,25 @@
 	}
 
   // add the selected node to the history list then set the state for the current node
-	function handlAddNode(event: any): void {
+	function handelAddNode(event: any): void {
 		const {id, name} = event.detail;
 		const newNode: ILinkedListNode<IHistoryNode> = new LinkedListNode({id, name});
 		historyList.addNode(newNode);
 		historyList = historyList;
-		setNodes(id);
-	}
-
-  // update the state when back event happens (single step or jump to)
-	function handleOnBack(event: any): void {
-		const {historyList} = event.detail;
-		setNodes(historyList.isEmpty() ? undefined : historyList.getLast().value.id);
+		handelSetNodes(event);
 	}
 </script>
 
-<section class={'nodeNavigatorWrapper'}>
+<section>
   <Navigator
 		bind:historyList
-		on:onBack={handleOnBack}
+		on:onBack={handelSetNodes}
 	/>
 	{#if currentNode}
   	<NodeDetails bind:node={currentNode} />
 	{/if}
   <NodeList
 		bind:nodes={currentNodes}
-		on:addNode={handlAddNode}
+		on:addNode={handelAddNode}
 	/>
 </section>

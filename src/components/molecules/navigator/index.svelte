@@ -13,19 +13,15 @@
   // local var
   const dispatch = createEventDispatcher();
 
-  // remove nodes from the linked list and dispatch updated history list
-  function handleBack() {
-    const idx: number = historyList.size === 1 ? 0 : historyList.size - 1;
+  // if a index is passed, it is a jump to node click
+  // else check the history list size, if 1 then we set the index to 0 (head of list) else the last index
+  // remove nodes from the history list to the index inclusive and dispatch current node id to update nodes
+  function handleBack(idx?: number) {
+    if (!idx) idx = historyList.size === 1 ? 0 : historyList.size - 1;
     historyList.removeNodes(idx);
     historyList = historyList;
-    dispatch('onBack',{ historyList });
-  }
-
-  // when a node in the history tree is clicked, clear history up to that node and dispatch the updated history list
-  function handleDirectNodeClick(idx: number) {
-    historyList.removeNodes(idx);
-    historyList = historyList;
-    dispatch('onBack',{ historyList });
+    const id: string = historyList.isEmpty() ? undefined : historyList.getLast().value.id;
+    dispatch('onBack', { id } );
   }
 </script>
 
@@ -33,7 +29,7 @@
   {#if !historyList.isEmpty()}
     <button
       type={'button'}
-      on:click={handleBack}
+      on:click={() => handleBack()}
       disabled={historyList.isEmpty()}
       aria-label={'Back'}
       title={'Back one node'}
@@ -46,7 +42,7 @@
     {#each historyList.listAllValues() as value, idx}
       <button
         type={'button'}
-        on:click={() => handleDirectNodeClick(idx)}
+        on:click={() => handleBack(idx)}
         class={"linkedNode"}
         title={`Back to node ${value.name}`}
         disabled={historyList.size - 1 === idx}

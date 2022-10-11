@@ -6,7 +6,7 @@
 	import { setContext } from 'svelte';
 
 	// set the context for the app
-	setContext('nodes', data)
+	setContext('nodes', data);
 </script>
 
 <main transition:fade="{{delay: 1000, duration: 500}}">
