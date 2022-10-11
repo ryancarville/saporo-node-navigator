@@ -8,14 +8,16 @@
 	import NodeList from '../../molecules/nodeList/index.svelte';
 	import Navigator from '../../molecules/navigator/index.svelte';
 	import NodeDetails from '../../molecules/nodeDetails/index.svelte';
+  import { LinkedList } from "../../../utils/linkedList";
+	import { getContext } from 'svelte';
 
-	// props
-	export let nodes: IMockData[];
-	export let historyList: ILinkedList<IHistoryNode>;
+	// nodes from context
+	let nodes: IMockData[] = getContext('nodes');
 
   // local vars
 	let currentNodes: IMockData[] = nodes;
 	let currentNode: IMockData = undefined;
+	let historyList: ILinkedList<IHistoryNode> = new LinkedList<IHistoryNode>();
 
 	// set the current node and its connections if id is passed
 	// else reset to original state
@@ -54,7 +56,7 @@
   	<NodeDetails bind:node={currentNode} />
 	{/if}
   <NodeList
-		nodes={currentNodes}
+		bind:nodes={currentNodes}
 		on:addNode={handlAddNode}
 	/>
 </section>

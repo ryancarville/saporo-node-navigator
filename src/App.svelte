@@ -1,16 +1,12 @@
 <script lang="ts">
   // Main app entry point
-  import { LinkedList } from "./utils/linkedList";
-	import type { IMockData } from "./types/mockData";
-  import type { ILinkedList } from "./types/linkedList";
-  import type { IHistoryNode } from "./types/linkedListNode";
 	import NodeNavigator from '../src/components/organisims/NodeNavigator/index.svelte';
   import { fade } from "svelte/transition";
-  import { quintOut } from "svelte/easing";
+	import { data } from './data';
+	import { setContext } from 'svelte';
 
-	// props
-	export let nodes: IMockData[];
-	export let historyList: ILinkedList<IHistoryNode> = new LinkedList<IHistoryNode>();
+	// set the context for the app
+	setContext('nodes', data)
 </script>
 
 <main transition:fade="{{delay: 1000, duration: 500}}">
@@ -23,7 +19,7 @@
 			class={'saporoLogo'}
 		/>
 	</header>
-	<NodeNavigator {nodes} bind:historyList />
+	<NodeNavigator />
 </main>
 
 <style>

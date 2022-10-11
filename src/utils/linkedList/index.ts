@@ -45,28 +45,30 @@ export class LinkedList<T> implements ILinkedList<T> {
     // else loop thru the list until we reach the index we want to remove
     // then set the previous pointer to null
     else {
-      this.size = 1;
       let currIdx: number = 0;
       let prev: ILinkedListNode<T> = this.head;
       let tail: ILinkedListNode<T> = this.head.next;
-      // fail safe if the next is null then we are at the head
+      // if the next is null then we are at the head (fail safe)
       if (tail === null) {
         this.clear();
         return;
       }
-
+      // initialize the size to one since the loop starts at the second node
+      this.size = 1;
       while (tail.next) {
-        this.size++;
+        // we reached the index to remove
         if (currIdx === startIdx) break;
+        // move to the next node
         prev = tail;
         tail = tail.next;
+        this.size++;
         currIdx++;
       }
       prev.next = null;
     }
   }
 
-  // loop thru list and add values to a collection to return
+  // traverse the list to add values to a collection to return
   public listAllValues(): T[] {
     let node: ILinkedListNode<T> = this.head;
     const allValues: T[] = [];
