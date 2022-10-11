@@ -25,8 +25,8 @@
   }
 </script>
 
-<nav>
-  {#if !historyList.isEmpty()}
+{#if !historyList.isEmpty()}
+  <nav>
     <button
       type={'button'}
       on:click={() => handleBack()}
@@ -37,8 +37,6 @@
     >
       <Icon data={backward} scale={1.3}/>
     </button>
-  {/if}
-  {#if !historyList.isEmpty()}
     {#each historyList.listAllValues() as value, idx}
       <button
         type={'button'}
@@ -50,8 +48,8 @@
         {value.name} <Icon data={arrowRight} scale={1.3}/>
       </button>
     {/each}
-  {/if}
-</nav>
+  </nav>
+{/if}
 
 <style>
   nav {
